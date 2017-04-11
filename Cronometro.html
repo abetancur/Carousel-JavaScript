@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cronómetro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/touchjs/0.2.14/touch.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var t, cl = $("#crono");
+
+            function mostrar()  { cl.html((+cl.html() + 0.1).toFixed(1)); };
+            function arrancar() { t=setInterval(mostrar, 100);};
+            function parar()    { clearInterval(t);  t=undefined; };
+            function cambiar()  { if (!t) arrancar(); else parar(); };
+
+            $("#cambiar").on('tap', cambiar);
+            $("#inicializar").on('taphold', function(){ cl.html("0.0"); });
+        });
+    </script>
+</head>
+<body>
+<h2>Cronómetro</h2>
+
+<h2><span id="crono"> 0.0 </span> segundos </h2>
+
+<img src="images/edit-black.svg" alt="" id="cambiar"/>
+<img src="images/edit-black.svg" alt="" id="inicializar"/>
+</body>
+</html>
